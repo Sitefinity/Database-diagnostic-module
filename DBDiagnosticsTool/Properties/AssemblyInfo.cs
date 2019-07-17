@@ -12,8 +12,8 @@ using Telerik.Sitefinity.Services;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Progress")]
 [assembly: AssemblyProduct("DBDiagnostics")]
-[assembly: AssemblyCopyright("Copyright © Progress 2019")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © 2005-2019 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.")]
+[assembly: AssemblyTrademark("Sitefinity")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

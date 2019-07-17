@@ -35,14 +35,15 @@ namespace DBDiagnostics
     /// - with a backend page
     /// - and a dashboard widget
     /// </summary>
-    /// 
 
     public class DBDiagnosticsModule : ModuleBase
     {
-        //Provide the GUID of the desired landing page for your module
-        //The LandingPageId specifies which is the default module page
-        //This is the entry point for the module UI. It is usually added under the Administration menu
-        //Some modules may not have landing pages, or have them hiddedn, depending on the use case scenario
+        /// <summary>
+        /// Provide the GUID of the desired landing page for your module
+        /// The LandingPageId specifies which is the default module page
+        /// This is the entry point for the module UI.It is usually added under the Administration menu
+        /// Some modules may not have landing pages, or have them hiddedn, depending on the use case scenario
+        /// </summary>
         public override Guid LandingPageId
         {
             get
@@ -51,10 +52,12 @@ namespace DBDiagnostics
             }
         }
 
-        //Provide a list of managers your module will be working with
-        //It might be your own managers or default Sitefinity ones
-        //Sitefintiy CMS uses this collection to make sure the managers (and their respective providers) are initialized
-        //This way you can safely work with the managers inside your module logic
+        /// <summary>
+        /// Provide a list of managers your module will be working with
+        /// It might be your own managers or default Sitefinity ones
+        /// Sitefintiy CMS uses this collection to make sure the managers (and their respective providers) are initialized
+        /// This way you can safely work with the managers inside your module logic
+        /// </summary>
         public override Type[] Managers
         {
             get
@@ -63,9 +66,11 @@ namespace DBDiagnostics
             }
         }
 
-        //This method is called every time your module initializes
-        //For example when your Sitefinity website restarts
-        //here you confgigure your module settings, configurations, resources and so on
+        /// <summary>
+        /// This method is called every time your module initializes
+        /// For example when your Sitefinity website restarts
+        /// Here you confgigure your module settings, configurations, resources and so on
+        /// </summary>
         public override void Initialize(ModuleSettings settings)
         {
             base.Initialize(settings);
@@ -77,9 +82,12 @@ namespace DBDiagnostics
                 .Localization<DBDiagnosticsToolResources>();
         }
 
-        //Add any virtual paths that you want to be automatically registered
-        //Virtual paths are used to resolve embedded resources from the assemblies, emulating a folder strucutre
-        //If no virtual path is specified, the default EmbeddedResourceResolver and your module's assembly name are used
+        /// <summary>
+        /// Add any virtual paths that you want to be automatically registered
+        /// Virtual paths are used to resolve embedded resources from the assemblies, emulating a folder strucutre
+        /// If no virtual path is specified, the default EmbeddedResourceResolver and your module's assembly name are used
+        /// </summary>
+        /// <returns>An IDictionary of virtual paths</returns>
         protected override IDictionary<string, Action<VirtualPathElement>> GetVirtualPaths()
         {
             var paths = new Dictionary<string, Action<VirtualPathElement>>();
@@ -87,16 +95,23 @@ namespace DBDiagnostics
             return paths;
         }
 
-        //If your module needs to store any configurations, load them here
-        //The actual implementation is bset separated in a separate config class
-        //In this case the /Config/DBDiagnosticsConfig.cs is empty as we don't need configs, but is added for demo purposes
+
+        /// <summary>
+        /// If your module needs to store any configurations, load them here
+        /// The actual implementation is bset separated in a separate config class
+        /// In this case the /Config/DBDiagnosticsConfig.cs is empty as we don't need configs, but is added for demo purposes
+        /// </summary>
+        /// <returns>The module configuration class</returns>
         protected override ConfigSection GetModuleConfig()
         {
             return Telerik.Sitefinity.Configuration.Config.Get<DBDiagnosticsConfig>();
         }
 
-        //The install method is called initially, when your module is added to your Sitefinity website
-        //Here you can install your module configurations, add the module pages and widgets
+        /// <summary>
+        /// The install method is called initially, when your module is added to your Sitefinity website
+        /// Here you can install your module configurations, add the module pages and widgets
+        /// </summary>
+        /// <param name="initializer"></param>
         public override void Install(SiteInitializer initializer)
         {
             //This logic below is meant to verify that you're usign the module with the supported DB types only
@@ -122,10 +137,14 @@ namespace DBDiagnostics
             AddDashboardDBDiagnosticsWidgetToPage(initializer, pageNode);
         }
 
-        //Here you can implement any configurations-related logic
-        //In our case we are registering the DB Diagnostics widget 
-        //In the Backend page widgets section
-        //So it can be manually added to a backend page
+
+        /// <summary>
+        /// Here you can implement any configurations-related logic
+        /// In our case we are registering the DB Diagnostics widget 
+        /// In the Backend page widgets section
+        /// So it can be manually added to a backend page
+        /// </summary>
+        /// <param name="initializer"></param>
         private void InstallConfiguration(SiteInitializer initializer)
         {
             initializer.Installer
@@ -139,14 +158,17 @@ namespace DBDiagnostics
         }
 
         #region Module backend page and widget
-        //Here we are instantinating and configuring our DB Diagnostics widget
-        //Creating a new backend group page and placing it under the main Administration menu, under the Tools section
-        //This page only serves as a placeholder in the backend navigation menu
-        //After that we are creatign a standard backend page 
-        //That contains the actual module UI
-        //It is a child of the first page we created, and is hidden from the naviagtion
-        //Instead, it is opened, when a user clicks on the group page from Administration menu
-        //Finally we are addingthe instantiated and configured DB diagnostics widget on the page
+        /// <summary>
+        /// Here we are instantinating and configuring our DB Diagnostics widget
+        /// Creating a new backend group page and placing it under the main Administration menu, under the Tools section
+        /// This page only serves as a placeholder in the backend navigation menu
+        /// After that we are creatign a standard backend page 
+        /// That contains the actual module UI
+        /// It is a child of the first page we created, and is hidden from the naviagtion
+        /// Instead, it is opened, when a user clicks on the group page from Administration menu
+        /// Finally we are addingthe instantiated and configured DB diagnostics widget on the page
+        /// </summary>
+        /// <param name="initializer"></param>
         private void InstallNewDBDiagnosticsPage(SiteInitializer initializer)
         {
             Guid siblingId = Guid.Empty;
@@ -175,14 +197,18 @@ namespace DBDiagnostics
                     .Done();
         }
 
-        //Here we are taking care of adding the Db diagnostics dashboard widget to the Sitefintiy dashboard
-        //First, we are registering our widget in the backend pages toolbox
-        //Then we are instantiating the Db diagnostics dashboard widget
-        //And adding it to the Dashboard backend page
-        //Note that we must specify a valid placeholder where the widget should be placed
-        //We must also specify the widget caption
-        //Another specific you should pay attention to is the permissions configuration for the widget
-        //In this case we are making sure the widget is visible only to Administrators
+        /// <summary>
+        /// Here we are taking care of adding the Db diagnostics dashboard widget to the Sitefintiy dashboard
+        /// First, we are registering our widget in the backend pages toolbox
+        /// Then we are instantiating the Db diagnostics dashboard widget
+        /// And adding it to the Dashboard backend page
+        /// Note that we must specify a valid placeholder where the widget should be placed
+        /// We must also specify the widget caption
+        /// Another specific you should pay attention to is the permissions configuration for the widget
+        /// In this case we are making sure the widget is visible only to Administrators
+        /// </summary>
+        /// <param name="initializer"></param>
+        /// <param name="pageNode"></param>
         private void AddDashboardDBDiagnosticsWidgetToPage(SiteInitializer initializer, PageNode pageNode)
         {
             initializer.Installer
@@ -218,7 +244,11 @@ namespace DBDiagnostics
         }
 
         #region Helper methods to facilitate adding the widget on a page
-        //Helper method making sure all draft version sof the page we are editing are cleared
+        /// <summary>
+        /// Helper method making sure all draft version sof the page we are editing are cleared
+        /// </summary>
+        /// <param name="pageNode"></param>
+        /// <param name="pageManager"></param>
         private void RemoveDraftsVersions(PageNode pageNode, PageManager pageManager)
         {
             PageData dashBoardPageData = pageNode.GetPageData();
@@ -226,7 +256,13 @@ namespace DBDiagnostics
             pageManager.PagesLifecycle.DiscardAllDrafts(dashBoardPageData);
         }
 
-        //Helper method helping locate the desired layout control, whcih will be used as a placeholder for our widget
+        /// <summary>
+        /// Helper method helping locate the desired layout control, whcih will be used as a placeholder for our widget
+        /// </summary>
+        /// <param name="targetedLayoutPlaceHolders"></param>
+        /// <param name="dashboard"></param>
+        /// <param name="placeHolderIndex"></param>
+        /// <returns></returns>
         private PageDraftControl GetTargetedControl(string[] targetedLayoutPlaceHolders, PageDraft dashboard, int placeHolderIndex)
         {
             PageDraftControl targetedControl = null;
@@ -262,7 +298,15 @@ namespace DBDiagnostics
             return targetedControl;
         }
 
-        //Helper method facilitating the logic of adding a widget to a page
+        /// <summary>
+        /// Helper method facilitating the logic of adding a widget to a page
+        /// </summary>
+        /// <param name="pageManager"></param>
+        /// <param name="pageNode"></param>
+        /// <param name="control"></param>
+        /// <param name="targetedLayoutPlaceHolders"></param>
+        /// <param name="skipIfContainsControl"></param>
+        /// <param name="placeHolderIndex"></param>
         private void AddWidgetToDashboard(PageManager pageManager, PageNode pageNode, PageDraftControl control, string[] targetedLayoutPlaceHolders, bool skipIfContainsControl = false, int placeHolderIndex = 0)
         {
             RemoveDraftsVersions(pageNode, pageManager);
@@ -310,6 +354,9 @@ namespace DBDiagnostics
         #endregion
 
         #region Analysis and Logging logic
+        /// <summary>
+        /// Processes the analysis of the DB parameters
+        /// </summary>
         private void LogInitialState()
         {
             LogDbSize();
@@ -317,6 +364,9 @@ namespace DBDiagnostics
             LogIndexFragmentation();
         }
 
+        /// <summary>
+        /// Logs the fragmentation ratio of the DB indexes
+        /// </summary>
         private void LogIndexFragmentation()
         {
             var dbService = new DatabaseDiagnosticsService();
@@ -332,6 +382,9 @@ namespace DBDiagnostics
             Log.Write(sb.ToString(), System.Diagnostics.TraceEventType.Information);
         }
 
+        /// <summary>
+        /// Logs the total size of the database
+        /// </summary>
         private void LogDbSize()
         {
             var dbService = new DatabaseDiagnosticsService();
@@ -344,6 +397,9 @@ namespace DBDiagnostics
             Log.Write(sb.ToString(), System.Diagnostics.TraceEventType.Information);
         }
 
+        /// <summary>
+        /// Logs the size of each database table
+        /// </summary>
         private void LogTableSizes()
         {
             var dbService = new DatabaseDiagnosticsService();

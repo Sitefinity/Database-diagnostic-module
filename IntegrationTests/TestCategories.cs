@@ -9,6 +9,6 @@ namespace IntegrationTests
     { /// <summary>
         /// Specifies the name of the category of tests related to Sitefinity modules.
         /// </summary>
-        public const string Hackathon = "Hackathon";
+        public const string DBDiagnostics = "DatabaseDiagnostics";
     }
 }
