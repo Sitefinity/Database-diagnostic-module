@@ -1,0 +1,96 @@
+﻿@using Telerik.Sitefinity.Frontend.Mvc.Helpers;
+@using Telerik.Sitefinity.Modules.Pages;
+@using Telerik.Sitefinity.Localization
+@using DBDiagnostics
+
+@Html.StyleSheet(Url.EmbeddedResource("Telerik.Sitefinity.Resources.Reference", "Telerik.Sitefinity.Resources.Scripts.Kendo.styles.kendo_default_min.css"))
+@Html.StyleSheet(Url.EmbeddedResource("Telerik.Sitefinity.Resources.Reference", "Telerik.Sitefinity.Resources.Scripts.Kendo.styles.kendo_common_min.css"))
+
+@Html.Script(ScriptRef.JQuery)
+@Html.Script(ScriptRef.AngularJS)
+@Html.Script(ScriptRef.KendoAll, "top")
+@Html.Script(Url.WidgetContent("Mvc/Scripts/db-diagnostics-tool.js"))
+@Html.Script(Url.EmbeddedResource("Telerik.Sitefinity.Resources.Reference", "Telerik.Sitefinity.Resources.Scripts.Kendo.kendo.web.min.js"))
+@Html.Script(Url.EmbeddedResource("Telerik.Sitefinity.Resources.Reference", "Telerik.Sitefinity.Resources.Scripts.Kendo.kendo.angular.min.js"))
+
+<div ng-app="DbDiagnosticsModule" class="sfMLeft10 sfMTop10">
+    <div ng-controller="DbDiagnosticsController" ng-cloak>
+        <h1 class="sfMLeft10 sfMTop10 sfMBottom20">DB Diagnostics Tool</h1>
+
+        <div class="sfMLeft10 sfMTop10" ng-init="getDatabaseSize()">
+            <dl class="sfLicenseInfo sfPTop15 sfPBottom15">
+                <dt>
+                    Data
+                </dt>
+                <dd>
+                    {{databaseSize.Data}}
+                </dd>
+                <dt>
+                    Index
+                </dt>
+                <dd>
+                    {{databaseSize.Index}}
+                </dd>
+                <dt>
+                    Name
+                </dt>
+                <dd>
+                    {{databaseSize.Name}}
+                </dd>
+                <dt>
+                    Reserved
+                </dt>
+                <dd>
+                    {{databaseSize.Reserved}}
+                </dd>
+                <dt>
+                    Size
+                </dt>
+                <dd>
+                    {{databaseSize.Size}}
+                </dd>
+                <dt>
+                    Unallocated
+                </dt>
+                <dd>
+                    {{databaseSize.Unallocated}}
+                </dd>
+                <dt>
+                    Unused
+                </dt>
+                <dd>
+                    {{databaseSize.Unused}}
+                </dd>
+            </dl>
+        </div>
+
+        <div class="sfMLeft10 sfMTop10">
+            <a ng-click="rebuildIndexes()" class="sfLinkBtn sfMBottom10">Rebuild indexes</a>
+        </div>
+
+        <div class="sfMLeft10 sfMTop10">
+            <a ng-click="getDatabaseTables()" class="sfLinkBtn sfMBottom10">@Html.Resource("DatabaseTablesTitle")</a>
+        </div>
+
+        <div class="sfMLeft10 sfMTop10">
+            <a ng-click="getIndexFragmentation()" class="sfLinkBtn sfMBottom10">Get index fragmentation</a>
+        </div>
+
+        <div class="sfMLeft10 sfMTop10">
+            <span ng-show="rebuildIndexesSuccessMsg" class="sfGreen">Indexes rebuild successfully!</span>
+        </div>
+        <div class="sfMLeft10 sfMTop10">
+            <span ng-show="showLoading" class="sfLoadingDataImage"></span>
+        </div>
+
+        <div class="sfMLeft10 sfMTop10 sfMBottom30 sfW900" ng-show="databaseTables.length > 0">
+            <h2 class="sfMBottom10">Database tables</h2>
+            <div kendo-grid="dbTablesGrid" options="dbTablesGridOptions"></div>
+        </div>
+
+        <div class="sfMLeft10 sfMTop10 sfMBottom30 sfW900" ng-show="indexFragmentation.length > 0">
+            <h2 class="sfMBottom10">Index Fragmentation</h2>
+            <div kendo-grid="indexFragmentationGrid" options="indexFragmentationGridOptions"></div>
+        </div>
+    </div>
+</div>

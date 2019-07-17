@@ -1,0 +1,27 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+	<metadata>
+		<id>Progress.Sitefinity.DBDiagnostics</id>
+		<version>12.0.7000</version>
+    <title>Progress.Sitefinity.DBDiagnostics</title>
+    <description>Progress.Sitefinity.DBDiagnostics</description>
+		<authors>Progress Black Market Team</authors>
+		<owners>Progress Black Market Team</owners>
+		<iconUrl>http://www.sitefinity.com/sitefinityImages/default-source/sitefinity-nuget/progresslogo.png</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<copyright>Progress Black Market Team 2019</copyright>
+		<language>en-US</language>
+		<tags>Progress Sitefinity Hackathon Marketplace</tags>
+	
+		<dependencies>
+      <dependency id="Telerik.Sitefinity.Core" version="12.0.7000" />
+      <dependency id="Telerik.Sitefinity.Dashboard" version="12.0.7000" />
+      <dependency id="Telerik.Sitefinity.Feather.Core" version="12.0.7000" />
+      <dependency id="Telerik.Sitefinity.Mvc" version="12.0.7000" />
+		</dependencies>	
+	</metadata>
+  
+	<files>
+		<file src="bin\Release\DBDiagnostics.dll" target="lib\net472" />
+	</files>
+</package>
