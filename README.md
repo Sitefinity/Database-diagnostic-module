@@ -24,7 +24,7 @@ Alternatively, you can add the DB Diagnostics module project to your Sitefintiy 
 
 ## Using the module
 Once you start your Sitefinity website and the module is automatically installed, users in the Administrators role will see the DB Diagnostics summary widget on the Sitefintiy dashboard:
-
+![alt text](https://github.com/Sitefinity/Database-diagnostic-module/blob/master/Screenshots/Dashboard%20widget.PNG)
 The dashbaord widget providesa summary of the database size, space distribution and lists the top 5 largest tables. To run full reports on the database and tables size, analyze indexes fragmentation, and rebuild database indexes use the *Go to DB diagnostics* link at the bottom of the dashbopard widget, or alternatively navigate to newly created item in the Sitefintiy backend navigation menu *Administration -> DB Diagnostics*
 You will be presented with the full UI of the DB diagnostics module:
-
+![alt text](https://github.com/Sitefinity/Database-diagnostic-module/blob/master/Screenshots/Module%20UI.PNG)
