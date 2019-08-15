@@ -199,7 +199,7 @@
     <EmbeddedResource Include="Mvc\Scripts\db-diagnostics-tool.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ReadMe.txt" />
+    <Content Include="ReadMe.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 
