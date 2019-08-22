@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>Progress.Sitefinity.DBDiagnostics</id>
-		<version>12.0.7000</version>
+		<version>12.1.7100</version>
     <title>Progress.Sitefinity.DBDiagnostics</title>
     <description>Progress.Sitefinity.DBDiagnostics</description>
 		<authors>Progress Black Market Team</authors>
@@ -14,10 +14,10 @@
 		<tags>Progress Sitefinity Hackathon Marketplace</tags>
 	
 		<dependencies>
-      <dependency id="Telerik.Sitefinity.Core" version="12.0.7000" />
-      <dependency id="Telerik.Sitefinity.Dashboard" version="12.0.7000" />
-      <dependency id="Telerik.Sitefinity.Feather.Core" version="12.0.7000" />
-      <dependency id="Telerik.Sitefinity.Mvc" version="12.0.7000" />
+      <dependency id="Telerik.Sitefinity.Core" version="12.1.7100" />
+      <dependency id="Telerik.Sitefinity.Dashboard" version="12.1.7100" />
+      <dependency id="Telerik.Sitefinity.Feather.Core" version="12.1.7100" />
+      <dependency id="Telerik.Sitefinity.Mvc" version="12.1.7100" />
 		</dependencies>	
 	</metadata>
   
